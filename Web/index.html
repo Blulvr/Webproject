@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SketchArc</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 2em;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1><b>S</b>ketch<b>A</b>rc</h1>
+    <p>"Where ideas take shape."</p>
+  </header>
+
+  <div class="container">
+    <h2>Login to SketchArc</h2>
+
+    <!-- Login Form -->
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <input type="password" id="password" placeholder="Enter your password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Register Link -->
+    <p style="text-align: center;">Don't have an account? <a href="https://signup-page-link" target="_blank">Sign up here</a></p>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 SketchArc</p>
+  </div>
+
+  <script>
+    // ✅ Replace with your real Firebase project config
+    const firebaseConfig = {
+      apiKey: "your-api-key",
+      authDomain: "your-project-id.firebaseapp.com",
+      projectId: "your-project-id",
+      storageBucket: "your-project-id.appspot.com",
+      messagingSenderId: "your-sender-id",
+      appId: "your-app-id"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Login Form Handler
+    document.getElementById("login-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          alert("Welcome, " + user.email);
+          // Redirect after successful login
+          window.location.href = "dashboard.html"; // Optional next page
+        })
+        .catch((error) => {
+          alert("Error: " + error.message);
+        });
+    });
+  </script>
+
+</body>
+</html>
